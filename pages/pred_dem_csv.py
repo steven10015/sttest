@@ -3,8 +3,8 @@ import pandas as pd
 from utils import predict_flores
 
 # Título de la aplicación
-st.title('Predicción de flores desde un archivo CSV')
-st.image('iris.jpg', caption='Imagen de iris', use_column_width=True)
+st.title('Predicción de demanda desde un archivo CSV')
+st.image('demanda.jpg', caption='Imagen de iris', use_column_width=True)
 
 # Widget para cargar un archivo CSV
 uploaded_file = st.file_uploader("Selecciona un archivo CSV", type=['csv'])
