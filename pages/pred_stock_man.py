@@ -3,33 +3,58 @@ import pandas as pd
 from utils import predict_flores
 
 # Título de la aplicación
-st.title('Predicción manual de rotura de stock')
-st.image('demanda.jpg', caption='Imagen de iris', use_column_width=True)
+st.title('Predicción manual de demanda')
+st.image('demanda.jpg', caption='Imagen de demanda', use_column_width=True)
 
 # Texto introductorio
-st.write('**Ingresa los datos manualmente para realizar la predicción de la rotura de stock**')
+st.write('**Ingresa los datos manualmente para realizar la predicción de la demanda:**')
 
 # Diccionario para almacenar los datos de entrada
 input_data = {}
 
-# Lista de columnas para las características de la flor
-columns = ['stock actual', 'ventas recientes', 'tiempos estimado de reposicion ', 'tipo de producto']
+# 🔢 ENTRADAS NUMÉRICAS (ENTEROS)
+input_data['stock_actual'] = st.number_input(
+    'Stock actual',
+    min_value=0,
+    step=1
+)
 
-# Bucle para recorrer las columnas y obtener los datos de entrada
-for col in columns:
-    # Widget de entrada numérica para cada característica
-    input_data[col] = st.number_input(col, value=0.0)
+input_data['ventas_recientes'] = st.number_input(
+    'Ventas recientes',
+    min_value=0,
+    step=1
+)
 
-st.sidebar.header("Parametros del usuario")
+input_data['tiempo_reposicion_dias'] = st.number_input(
+    'Tiempo estimado de reposición (días)',
+    min_value=0,
+    step=1
+)
 
-# Botón para realizar la predicción
+# 📦 CATEGORÍA / DEPARTAMENTO (SELECTBOX)
+categoria = st.selectbox(
+    'Categoría / Departamento',
+    (
+        '561 urban hombre',
+        '563 casual hombre',
+        '582 punto mujer',
+        '584 casual mujer',
+        '583 basic mujer',
+        '586 denim mujer',
+        '562 collection mujer'
+    )
+)
+
+input_data['categoria_departamento'] = categoria
+
+# Sidebar
+st.sidebar.header("Parámetros del usuario")
+
+# 🔮 Botón de predicción
 if st.button('Realizar Predicción'):
-    # Convertir el diccionario de entrada a un DataFrame de una sola fila
     input_df = pd.DataFrame([input_data])
 
-    # Realizar la predicción utilizando la función predict_flores
     predicted_value = predict_flores(input_df)
 
-    # Mostrar el resultado de la predicción
-    st.success('Éxito al realizar la predicción!')
-    st.write('El resultado de la predicción es:', predicted_value[0])
+    st.success('✅ Éxito al realizar la predicción')
+    st.write('📈 **Resultado de la predicción:**', predicted_value[0])
