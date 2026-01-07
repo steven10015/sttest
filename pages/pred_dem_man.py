@@ -4,7 +4,7 @@ from utils import predict_flores
 
 # Título de la aplicación
 st.title('Predicción manual de demanda')
-st.image('iris.jpg', caption='Imagen de iris', use_column_width=True)
+st.image('demanda.jpg', caption='Imagen de iris', use_column_width=True)
 
 # Texto introductorio
 st.write('**Ingresa los datos manualmente para realizar la predicción de la demanda:**')
